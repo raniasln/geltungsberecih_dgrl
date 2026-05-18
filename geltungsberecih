@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Artikel 1 – Druckgeräterichtlinie</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #ffffff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1 {
+      color: #1f4ea3;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+
+    .info-box {
+      background: #eef3ff;
+      border-left: 6px solid #1f4ea3;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .alert {
+      background: #fff3cd;
+      border-left: 6px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    details {
+      margin: 8px 0;
+      padding: 10px;
+      background: #f7f7f7;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    summary {
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #1f4ea3;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background: #163b7a;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Artikel 1 – Geltungsbereich</h1>
+
+  <p>
+    Diese Richtlinie gilt für die Auslegung, Fertigung und Konformitätsbewertung von Druckgeräten und Baugruppen
+    mit einem maximal zulässigen Druck (PS) von über 0,5 bar.
+  </p>
+
+  <div class="info-box">
+    <strong>Merke:</strong><br>
+    ✅ &gt; 0,5 bar → DGRL gilt<br>
+    ❌ ≤ 0,5 bar → DGRL gilt NICHT
+  </div>
+
+
+  <h2>Was gehört nicht in die DGRL?</h2>
+
+  <div class="alert">
+    Klicken Sie auf die Punkte, um Details anzuzeigen:
+  </div>
+
+  <details>
+    <summary>a) Fernleitungen</summary>
+    Rohrsysteme für den Transport von Fluiden zu oder von Anlagen.
+  </details>
+
+  <details>
+    <summary>b) Wasserversorgungssysteme</summary>
+    Netze für Versorgung, Verteilung und Abfluss von Wasser.
+  </details>
+
+  <details>
+    <summary>c) Einfache Druckbehälter</summary>
+    Geregelt durch Richtlinie 2014/29/EU.
+  </details>
+
+  <details>
+    <summary>d) Aerosolpackungen</summary>
+    Geregelt durch Richtlinie 75/324/EWG.
+  </details>
+
+  <details>
+    <summary>e) Fahrzeuge (z. B. KFZ-Gastanks)</summary>
+    Definiert durch EU-Fahrzeugrichtlinien.
+  </details>
+
+  <details>
+    <summary>f) Druckgeräte Kategorie I unter anderen Richtlinien</summary>
+    z. B. Maschinen, Aufzüge, Medizinprodukte.
+  </details>
+
+  <details>
+    <summary>g) Waffen</summary>
+    Militärische Geräte gemäß EU-Recht.
+  </details>
+
+  <details>
+    <summary>h) Nuklearanlagen</summary>
+    Speziell für kerntechnische Nutzung entwickelt.
+  </details>
+
+  <details>
+    <summary>i) Bohrlochkontrollgeräte</summary>
+    Nutzung in Öl-, Gas- und Geothermieanlagen.
+  </details>
+
+  <details>
+    <summary>j) Maschinen mit Druck als Nebenfaktor</summary>
+    z. B. Motoren, Pumpen, Verdichter.
+  </details>
+
+  <details>
+    <summary>k) Hochöfen und metallurgische Anlagen</summary>
+    Industrieanlagen zur Metallverarbeitung.
+  </details>
+
+  <details>
+    <summary>l) Hochspannungsgeräte</summary>
+    Transformatoren, Schaltanlagen usw.
+  </details>
+
+  <details>
+    <summary>m) Druckgehäuse für Übertragungssysteme</summary>
+    z. B. Kabelummantelungen.
+  </details>
+
+  <details>
+    <summary>n) Schiffe, Flugzeuge, Offshore-Anlagen</summary>
+    Spezielle mobile Systeme.
+  </details>
+
+  <details>
+    <summary>o) Flexible Druckgeräte</summary>
+    z. B. Reifen, Luftkissen, Schlauchboote.
+  </details>
+
+  <details>
+    <summary>p) Schalldämpfer</summary>
+    Auspuff- und Ansaugschalldämpfer.
+  </details>
+
+  <details>
+    <summary>q) Getränkeflaschen</summary>
+    Für Endverbrauch bestimmt.
+  </details>
+
+  <details>
+    <summary>r) Lebensmitteltransportbehälter</summary>
+    Bis max. 7 bar Druck.
+  </details>
+
+  <details>
+    <summary>s) Gefahrgut-Druckgeräte</summary>
+    Unterliegen Transportvorschriften.
+  </details>
+
+  <details>
+    <summary>t) Wasserheizsysteme</summary>
+    Heizkörper und Rohrleitungen.
+  </details>
+
+  <details>
+    <summary>u) Niederdruck-Flüssigkeitsbehälter</summary>
+    Gasdruck ≤ 0,5 bar.
+  </details>
+
+
+  <h2>Mini-Test</h2>
+
+  <p>Frage: Fällt ein Behälter mit 0,3 bar unter die DGRL?</p>
+
+  <button onclick="checkAnswer()">Antwort anzeigen</button>
+
+  <p id="result"></p>
+
+</div>
+
+
+<script>
+function checkAnswer() {
+  document.getElementById("result").innerText =
+    "✅ Richtig: Nein! Unter 0,5 bar fällt der Behälter nicht unter die DGRL.";
+}
+</script>
+
+</body>
+</html>
