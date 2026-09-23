@@ -9,6 +9,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       background: #ffffff;
+      color: #333333;
     }
 
     .container {
@@ -23,6 +24,7 @@
 
     h2 {
       margin-top: 30px;
+      color: #1f4ea3;
     }
 
     .info-box {
@@ -30,6 +32,7 @@
       border-left: 6px solid #1f4ea3;
       padding: 15px;
       margin: 20px 0;
+      line-height: 1.6;
     }
 
     .alert {
@@ -51,14 +54,73 @@
       font-weight: bold;
     }
 
-    button {
+    /* Interaktives Regler-Widget */
+    .slider-card {
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 24px;
+      margin: 25px 0;
+      text-align: center;
+    }
+
+    .slider-container {
+      margin: 20px auto;
+      max-width: 320px;
+    }
+
+    input[type=range] {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .pressure-value {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+
+    .status-badge {
+      display: inline-block;
+      width: 80%;
+      max-width: 360px;
+      padding: 14px 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      transition: background-color 0.2s ease;
+    }
+
+    .badge-excluded {
+      background-color: #d93844;
+    }
+
+    .badge-included {
+      background-color: #1f7a3a;
+    }
+
+    .context-box {
       margin-top: 20px;
-      padding: 10px 15px;
+      padding: 14px 18px;
+      background: #ffffff;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Mini-Test */
+    button {
+      margin-top: 15px;
+      padding: 10px 18px;
       background: #1f4ea3;
       color: white;
       border: none;
       cursor: pointer;
       border-radius: 4px;
+      font-size: 0.95rem;
     }
 
     button:hover {
@@ -66,10 +128,9 @@
     }
 
     #result {
-      margin-top: 10px;
+      margin-top: 12px;
       font-weight: bold;
     }
-
   </style>
 </head>
 
@@ -90,6 +151,24 @@
     ❌ ≤ 0,5 bar → DGRL gilt NICHT
   </div>
 
+  <!-- Interaktives Regler-Widget mit Erläuterungsbox -->
+  <div class="slider-card">
+    <h3 style="margin-top:0; color:#1f4ea3;">DGRL – Grenzwert verstehen</h3>
+    <p>Bewegen Sie den Regler und prüfen Sie, ob der Druck unter die DGRL fällt.</p>
+
+    <div class="slider-container">
+      <input type="range" id="pressureSlider" min="0" max="3" step="0.1" value="0.5" oninput="updateStatus(this.value)">
+      <div class="pressure-value"><span id="pressureDisplay">0.5</span> bar</div>
+    </div>
+
+    <div id="statusBadge" class="status-badge badge-excluded">
+      ✕ Nicht DGRL-pflichtig
+    </div>
+
+    <div class="context-box" id="contextBox">
+      <strong>Rechtlicher Status:</strong> Bei exakt 0,5 bar oder darunter greift die DGRL nicht. Die Richtlinie gilt strikt erst bei einem Überdruck von mehr als 0,5 bar (z. B. typische drucklose Behälter oder Getränkeflaschen).
+    </div>
+  </div>
 
   <h2>Was gehört nicht in die DGRL?</h2>
 
@@ -104,7 +183,7 @@
 
   <details>
     <summary>b) Wasserversorgungssysteme</summary>
-    Netze für Versorgung, Verteilung und Abfluss von Wasser.
+    Netze für Versorgung, Verteilung und Abfluss von Wasser samt zugehörigen Anlagen.
   </details>
 
   <details>
@@ -118,90 +197,89 @@
   </details>
 
   <details>
-    <summary>e) Fahrzeuge (z. B. KFZ-Gastanks)</summary>
-    Definiert durch EU-Fahrzeugrichtlinien.
+    <summary>e) Fahrzeuge (z. B. KFZ-Gastanks)</summary>
+    Definiert und typgenehmigt über gesonderte EU-Fahrzeugrichtlinien.
   </details>
 
   <details>
     <summary>f) Druckgeräte Kategorie I unter anderen Richtlinien</summary>
-    z. B. Maschinen, Aufzüge, Medizinprodukte.
+    Geräte mit Einstufung maximal in Kategorie I, die bereits durch Richtlinien wie Maschinen-, Aufzugs- oder Medizinprodukterichtlinie abgedeckt sind.
   </details>
 
   <details>
     <summary>g) Waffen</summary>
-    Militärische Geräte gemäß EU-Recht.
+    Militärische Geräte und Waffen gemäß EU-Recht.
   </details>
 
   <details>
     <summary>h) Nuklearanlagen</summary>
-    Speziell für kerntechnische Nutzung entwickelt.
+    Speziell für kerntechnische Verwendung konstruierte Komponenten, deren Versagen radioaktive Freisetzungen verursachen kann.
   </details>
 
   <details>
     <summary>i) Bohrlochkontrollgeräte</summary>
-    Nutzung in Öl-, Gas- und Geothermieanlagen.
+    Verwendung in der Erdöl-, Erdgas- und Geothermie-Exploration sowie -Förderung.
   </details>
 
   <details>
     <summary>j) Maschinen mit Druck als Nebenfaktor</summary>
-    z. B. Motoren, Pumpen, Verdichter.
+    Gehäuse und Maschinenteile, bei denen der Druck kein wesentlicher Auslegungsfaktor ist (z. B. Motoren, Pumpen, Turbinen).
   </details>
 
   <details>
     <summary>k) Hochöfen und metallurgische Anlagen</summary>
-    Industrieanlagen zur Metallverarbeitung.
+    Industrieanlagen und Öfen zur thermischen Behandlung und Metallverarbeitung.
   </details>
 
   <details>
     <summary>l) Hochspannungsgeräte</summary>
-    Transformatoren, Schaltanlagen usw.
+    Druckfeste Gehäuse für Transformatoren, Schaltanlagen und Steuerungskomponenten.
   </details>
 
   <details>
     <summary>m) Druckgehäuse für Übertragungssysteme</summary>
-    z. B. Kabelummantelungen.
+    Schutzumhüllungen und druckgeführte Kabelrohre für Fernmelde- und Energiekabel.
   </details>
 
   <details>
     <summary>n) Schiffe, Flugzeuge, Offshore-Anlagen</summary>
-    Spezielle mobile Systeme.
+    Schwimmende und fliegende Einheiten unter internationalen Schifffahrts- und Luftfahrtkonventionen.
   </details>
 
   <details>
     <summary>o) Flexible Druckgeräte</summary>
-    z. B. Reifen, Luftkissen, Schlauchboote.
+    Aufblasbare Hüllen wie Fahrzeugreifen, Luftkissen, Schlauchboote und Sportbälle.
   </details>
 
   <details>
     <summary>p) Schalldämpfer</summary>
-    Auspuff- und Ansaugschalldämpfer.
+    Auspuff- und Ansaugschalldämpfer für Verbrennungsmotoren oder Belüftung.
   </details>
 
   <details>
     <summary>q) Getränkeflaschen</summary>
-    Für Endverbrauch bestimmt.
+    Druckbehälter für den unmittelbaren Konsum und Vertrieb von kohlensäurehaltigen Getränken.
   </details>
 
   <details>
     <summary>r) Lebensmitteltransportbehälter</summary>
-    Bis max. 7 bar Druck.
+    Behälter für den Ausschank und Transport von Getränken mit einem Druck-Volumen-Produkt $PS \cdot V \le 500\text{ bar}\cdot\text{L}$ und $PS \le 7\text{ bar}$.
   </details>
 
   <details>
-    <summary>s) Gefahrgut-Druckgeräte</summary>
-    Unterliegen Transportvorschriften.
+    <summary>s) Gefahrgut-Druckgeräte (ortsbeweglich)</summary>
+    Unterliegen den Transportvorschriften (ADR/RID/ADN) und der Richtlinie 2010/35/EU (TPED).
   </details>
 
   <details>
     <summary>t) Wasserheizsysteme</summary>
-    Heizkörper und Rohrleitungen.
+    Heizkörper und Verrohrungen in herkömmlichen Warmwasserheizungen.
   </details>
 
   <details>
     <summary>u) Niederdruck-Flüssigkeitsbehälter</summary>
-    Gasdruck ≤ 0,5 bar.
+    Flüssigkeitsbehälter, bei denen der Gasdruck über dem Flüssigkeitsspiegel 0,5 bar nicht übersteigt.
   </details>
-
 
   <h2>Mini-Test</h2>
 
@@ -213,11 +291,28 @@
 
 </div>
 
-
 <script>
+function updateStatus(val) {
+  const pressure = parseFloat(val);
+  document.getElementById("pressureDisplay").innerText = pressure.toFixed(1);
+
+  const badge = document.getElementById("statusBadge");
+  const context = document.getElementById("contextBox");
+
+  if (pressure > 0.5) {
+    badge.className = "status-badge badge-included";
+    badge.innerText = "✓ DGRL-pflichtig";
+    context.innerHTML = "<strong>Rechtlicher Status:</strong> Der Druck liegt über 0,5 bar. Das Gerät fällt in den Anwendungsbereich der DGRL (sofern keine gesetzliche Ausnahme nach Artikel 1 Absatz 2 greift).";
+  } else {
+    badge.className = "status-badge badge-excluded";
+    badge.innerText = "✕ Nicht DGRL-pflichtig";
+    context.innerHTML = "<strong>Rechtlicher Status:</strong> Bei 0,5 bar oder darunter wird das Gefährdungspotenzial als gering eingestuft. Die DGRL greift nicht; es gelten allgemeine Anforderungen an die Produktsicherheit.";
+  }
+}
+
 function checkAnswer() {
   document.getElementById("result").innerText =
-    "✅ Richtig: Nein! Unter 0,5 bar fällt der Behälter nicht unter die DGRL.";
+    "✅ Richtig: Nein! Bei oder unter 0,5 bar fällt der Behälter nicht unter die DGRL.";
 }
 </script>
 
